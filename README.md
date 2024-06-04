@@ -118,26 +118,53 @@ I then grouped by CAUSE.CATEGORY with the aggregate function mean() to understan
 
 ## NMAR Analysis
 
-"""State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
+CUSTOMERS.AFFECTED might be NMAR because outages could be obstructing the systems responsible for data collection. In an outage situation, the priority may also be on restoring power, over ensuring reporting. 
+
+Additional data that we may want to be able to explain the missingess could be reports on operations and infrastruture data, to determine if missing data is from technical failures or just operational strain. We may also want to see infrastructure data to understand the redundancy at play. It would be helpful to know what the standard operating procedure is under these circumstances. 
 
 ## Missingness Dependency
+In order to test missingness dependency, I will compare the distriubution of OUTAGE.DURATION to CAUSE.CATEGORY and CLIMATE.REGION. To do so, I created a boolean column OUTAGE.DURATION.MISSING from OUTAGE.DURATION to analyze missigness. 
 
-### First category compared CHANGE THIS HEADER
+### CAUSE.CATEGORY
+
+I first examined missingness in relation to CAUSE.CATEGORY. I performed a permutation test using the total variation distance. 
+
+**Null Hypothesis**: The distribution of CAUSE.CATEGORY is the same when duration is missing vs not missing.
+
+**Alternate Hypothesis**: The distribution of CAUSE.CATEGORY is different when duration is missing vs not missing.
+
+Here we reject the null hypothesis with a very low p-value and an observed TVD of 0.2028. These indicate a difference in the distribution of CAUSE.CATEGORY when duration is missing versus not missing.
+
+Below is the empirical distribtuion of the TVD for CAUSE.CATEGORY:
+
+<iframe
+  src="assets/causetvd.html"
+  width="600"
+  height="400"
+  frameborder="0"
+></iframe>  
 
 
-### Second category compared CHANGE THIS HEADER
 
-"""Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
-• The distribution of column 
-Y
- when column 
-X
- is missing and the distribution of column 
-Y
- when column 
-X
- is not missing, as was done in Lecture 8.
-• The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
+### CLIMATE.REGION
+
+I then examined missingness in relation to CLIMATE.REGION. I performed a permutation test also using the total variation distance. 
+
+**Null Hypothesis**: The distribution of CLIMATE.REGION is the same when duration is missing vs not missing.
+
+**Alternate Hypothesis**: The distribution of CLIMATE.REGION is different when duration is missing vs not missing.
+
+Here we fail to reject the null hypothesis with a p-value of 0.166 and an observed TVD of 0.0794. This indicates that there is not significant evidence to suggest a difference in the distribution of CLIMATE.REGION when duration is missing versus not missing.
+
+
+Below is the empirical distribtuion of the TVD for CLIMATE.REGION:
+
+<iframe
+  src="assets/climatetvd.html"
+  width="600"
+  height="400"
+  frameborder="0"
+></iframe>     
 
 
 
