@@ -5,7 +5,7 @@ Power outage analysis using data from continental U.S. from January 2000 to July
 
 # Introduction
 
-This project involved analysis of a dataset with major power outages in the US from Jan 2000 - Jul 2016. The dataset was accessed through Purdue at https://engineering.purdue.edu/LASCI/research-data/outages.
+This project involved analysis of a dataset with major power outages in the US from Jan 2000 - Jul 2016. The dataset was accessed through [Purdue](https://engineering.purdue.edu/LASCI/research-data/outages.). 
 
 The dataset has a wide variety of information on the major outages, including but not limited to characteristics of the states in the continental U.S. such as climate and consumption patterns. 
 
@@ -29,7 +29,7 @@ For my analysis, I will use the following columns:
 | OUTAGE.RESTORATION.TIME | Time of day when outage stopped |
 | OUTAGE.DURATION | Duration of outage in minutes |
 | CUSTOMERS.AFFECTED | Number of customers affected by power outage event |
-| U.S._STATE | State where outage occurred |
+| U.S._STATE | State where outage occurred |  
 
 
 
@@ -52,7 +52,7 @@ Below are a few rows and columns of the cleaned outage DataFrame.
 | East North Central | intentional attack | 2014-05-11 18:38:00 | 2014-05-11 18:39:00  |
 | East North Central | severe weather     | 2010-10-26 20:00:00 | 2010-10-28 22:00:00  |
 | East North Central | severe weather     | 2012-06-19 04:30:00 | 2012-06-20 23:00:00  |
-| East North Central | severe weather     | 2015-07-18 02:00:00 | 2015-07-19 07:00:00  |
+| East North Central | severe weather     | 2015-07-18 02:00:00 | 2015-07-19 07:00:00  |  
 
 
 ## Exploratory Data Analysis 
@@ -62,33 +62,33 @@ Below are a few rows and columns of the cleaned outage DataFrame.
 I first performed some univariate analysis to understand the distribution of a couple
 individual variables. The most important of these analyses are shown below.
 
-To start, I plotted the distribution of power outages by climate region, to understand which regions were most impacted. It revealed that the Northeast region was by far the most impacted region, followed by the South and West regions.
+To start, I plotted the distribution of power outages by climate region, to understand which regions were most impacted. It revealed that the Northeast region was by far the most impacted region, followed by the South and West regions. 
 <iframe
   src="assets/univariate1.html"
   width="600"
   height="400"
   frameborder="0"
-></iframe>
+></iframe>  
 
-I then plotted the frequency of power outages by cause category, which shed some light on which types of causes were most common. Severe weather was the most common, followed by intentional attack. 
+I then plotted the frequency of power outages by cause category, which shed some light on which types of causes were most common. Severe weather was the most common, followed by intentional attack.  
 <iframe
   src="assets/univariate2.html"
   width="600"
   height="400"
   frameborder="0"
-></iframe>
+></iframe>  
 
 ### Bivariate Analysis
 
 I then performed some bivariate analysis to understand the distribution between multiple variables. The most important of these analyses are shown below.
 
-To start, I plotted OUTAGE.DURATION against CUSTOMERS.AFFECTED. The results were not very interpretable, but it did reveal that there was a concentration of short outages impacting a relatively small amount of customers. However, there was much variability and not a clear correlation here. Perhaps other relationships would be more enlightening.
+To start, I plotted OUTAGE.DURATION against CUSTOMERS.AFFECTED. The results were not very interpretable, but it did reveal that there was a concentration of short outages impacting a relatively small amount of customers. However, there was much variability and not a clear correlation here. Perhaps other relationships would be more enlightening. 
 <iframe
   src="assets/bivariate1.html"
   width="600"
   height="400"
   frameborder="0"
-></iframe>
+></iframe>  
 
 I then plotted OUTAGE.DURATION and CAUSE.CATEGORY. It revealed severe waether and fuel supply emergency as two leading causes in terms of outage duration.
 <iframe
@@ -96,7 +96,7 @@ I then plotted OUTAGE.DURATION and CAUSE.CATEGORY. It revealed severe waether an
   width="600"
   height="400"
   frameborder="0"
-></iframe>
+></iframe>  
 
 ### Grouping and Aggregates
 
@@ -110,7 +110,7 @@ I then grouped by CAUSE.CATEGORY with the aggregate function mean() to understan
 | islanding                     |                       200.545 |                          6169.09 |
 | public appeal                 |                      1468.45  |                          7618.76 |
 | severe weather                |                      3899.59  |                        188558    |
-| system operability disruption |                       732.902 |                        212827    |
+| system operability disruption |                       732.902 |                        212827    |    
 
 
 
