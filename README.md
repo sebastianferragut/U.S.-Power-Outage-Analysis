@@ -100,16 +100,15 @@ I then plotted OUTAGE.DURATION and CAUSE.CATEGORY. It revealed severe waether an
 
 I then grouped by CAUSE.CATEGORY with the aggregate function mean() to understand the average of OUTAGE.DURATION and CUSTOMERS.AFFECTED in relation to these cateogries. Here are the first several rows of this DataFrame: 
 
-|   ('OUTAGE.DURATION', 'mean') |   ('CUSTOMERS.AFFECTED', 'mean') |
-|------------------------------:|---------------------------------:|
-|                      1816.91  |                        109223    |
-|                     13484     |                             0.2  |
-|                       429.98  |                          1865.52 |
-|                       200.545 |                          6169.09 |
-|                      1468.45  |                          7618.76 |
-|                      3899.59  |                        188558    |
-|                       732.902 |                        212827    |
-
+| CAUSE.CATEGORY                |   ('OUTAGE.DURATION', 'mean') |   ('CUSTOMERS.AFFECTED', 'mean') |
+|:------------------------------|------------------------------:|---------------------------------:|
+| equipment failure             |                      1816.91  |                        109223    |
+| fuel supply emergency         |                     13484     |                             0.2  |
+| intentional attack            |                       429.98  |                          1865.52 |
+| islanding                     |                       200.545 |                          6169.09 |
+| public appeal                 |                      1468.45  |                          7618.76 |
+| severe weather                |                      3899.59  |                        188558    |
+| system operability disruption |                       732.902 |                        212827    |
 
 # Assessment of Missingness
 
