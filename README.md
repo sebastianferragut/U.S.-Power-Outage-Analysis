@@ -154,7 +154,7 @@ I then examined missingness in relation to CLIMATE.REGION. I performed a permuta
 
 **Alternate Hypothesis**: The distribution of CLIMATE.REGION is different when duration is missing vs not missing.
 
-Here we fail to reject the null hypothesis with a p-value of 0.166 and an observed TVD of 0.0794. This indicates that there is not significant evidence to suggest a difference in the distribution of CLIMATE.REGION when duration is missing versus not missing.
+Here we fail to reject the null hypothesis with a p-value of 0.166 and an observed TVD of 0.0795. This indicates that there is not significant evidence to suggest a difference in the distribution of CLIMATE.REGION when duration is missing versus not missing.
 
 
 Below is the empirical distribtuion of the TVD for CLIMATE.REGION:
@@ -170,14 +170,37 @@ Below is the empirical distribtuion of the TVD for CLIMATE.REGION:
 
 # Hypothesis Testing
 
-"""Clearly state your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
-p
--value, and your conclusion. Justify why these choices are good choices for answering the question you are trying to answer.
+As a reminder, the question I initially posed was:
 
-Optional: Embed a visualization related to your hypothesis test in your website.
+How do climate characteristics impact major power outages with high severity?
 
-Tip: When making writing your conclusions to the statistical tests in this project, never use language that implies an absolute conclusion; since we are performing statistical tests and not randomized controlled trials, we cannot prove that either hypothesis is 100% true or false.
+**Null Hypothesis (H0)**: The mean outage duration is the same across different climate categories.
 
+**Alternative Hypothesis (H1)**: The mean outage duration differs across different climate categories.
+
+**Test Statistic**: Difference in means (difference between the maximum mean outage duration and the minimum mean outage duration across climate categories)
+
+**Significance Level**: Significance level of 0.05. 
+
+The test statistic was chosen as difference in means because the distributions of the features analyzed are appropriately similar. The resulting p-value was 0.747. With this p-value, we fail to reject the null hypothesis. This suggests that there is no significant evidence that climate categories have a significant impact on outage durations. 
+
+Below is the empirical distriubtion of the test statistic: 
+
+<iframe
+  src="assets/climatehypo.html"
+  width="600"
+  height="400"
+  frameborder="0"
+></iframe>    
+
+We can also contextualize the failure to reject the null hypothesis by viewing the mean outage duration by climate category:
+
+<iframe
+  src="assets/climatemeanoutage.html"
+  width="600"
+  height="400"
+  frameborder="0"
+></iframe>   
 
 
 # Framing a Prediction Problem
