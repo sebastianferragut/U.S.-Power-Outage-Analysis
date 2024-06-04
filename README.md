@@ -57,25 +57,59 @@ Below are a few rows and columns of the cleaned outage DataFrame.
 
 ### Univariate Analysis 
 
-"""Embed at least one plotly plot you created in your notebook that displays the distribution of a single column (see Part 2: Report for instructions). Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one univariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
+I first performed some univariate analysis to understand the distribution of a couple
+individual variables. The most important of these analyses are shown below.
 
-### Bivariate Analysis
-
-"""Embed at least one plotly plot that displays the relationship between two columns. Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one bivariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
-
-### Grouping and Aggregates
-
-"""Embed at least one grouped table or pivot table in your website and explain its significance.
-
-
-EMBED EXAMPLE 
-
+To start, I plotted the distribution of power outages by climate region, to understand which regions were most impacted. It revealed that the Northeast region was by far the most impacted region, followed by the South and West regions.
 <iframe
-  src="assets/file-name.html"
+  src="assets/univariate1.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
+I then plotted the frequency of power outages by cause category, which shed some light on which types of causes were most common. Severe weather was the most common, followed by intentional attack. 
+<iframe
+  src="assets/univariate2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+### Bivariate Analysis
+
+I then performed some bivariate analysis to understand the distribution between multiple variables. The most important of these analyses are shown below.
+
+To start, I plotted OUTAGE.DURATION against CUSTOMERS.AFFECTED. The results were not very interpretable, but it did reveal that there was a concentration of short outages impacting a relatively small amount of customers. However, there was much variability and not a clear correlation here. Perhaps other relationships would be more enlightening.
+<iframe
+  src="assets/bivariate1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+I then plotted OUTAGE.DURATION and CAUSE.CATEGORY. It revealed severe waether and fuel supply emergency as two leading causes in terms of outage duration.
+<iframe
+  src="assets/bivariate2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+### Grouping and Aggregates
+
+I then grouped by CAUSE.CATEGORY with the aggregate function mean() to understand the average of OUTAGE.DURATION and CUSTOMERS.AFFECTED in relation to these cateogries. Here are the first several rows of this DataFrame: 
+
+|   ('OUTAGE.DURATION', 'mean') |   ('CUSTOMERS.AFFECTED', 'mean') |
+|------------------------------:|---------------------------------:|
+|                      1816.91  |                        109223    |
+|                     13484     |                             0.2  |
+|                       429.98  |                          1865.52 |
+|                       200.545 |                          6169.09 |
+|                      1468.45  |                          7618.76 |
+|                      3899.59  |                        188558    |
+|                       732.902 |                        212827    |
+
 
 # Assessment of Missingness
 
