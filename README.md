@@ -133,7 +133,7 @@ I first examined missingness in relation to CAUSE.CATEGORY. I performed a permut
 
 **Alternate Hypothesis**: The distribution of CAUSE.CATEGORY is different when duration is missing vs not missing.
 
-Here we reject the null hypothesis with a very low p-value and an observed TVD of 0.2028. These indicate a difference in the distribution of CAUSE.CATEGORY when duration is missing versus not missing.
+Here we reject the null hypothesis with a p-value of 0.0 and an observed TVD of 0.2028. These indicate a difference in the distribution of CAUSE.CATEGORY when duration is missing versus not missing.
 
 Below is the empirical distribtuion of the TVD for CAUSE.CATEGORY:
 
@@ -154,7 +154,7 @@ I then examined missingness in relation to CLIMATE.REGION. I performed a permuta
 
 **Alternate Hypothesis**: The distribution of CLIMATE.REGION is different when duration is missing vs not missing.
 
-Here we fail to reject the null hypothesis with a p-value of 0.166 and an observed TVD of 0.0795. This indicates that there is not significant evidence to suggest a difference in the distribution of CLIMATE.REGION when duration is missing versus not missing.
+Here we fail to reject the null hypothesis with a p-value of 0.171 and an observed TVD of 0.0795. This indicates that there is not significant evidence to suggest a difference in the distribution of CLIMATE.REGION when duration is missing versus not missing.
 
 
 Below is the empirical distribtuion of the TVD for CLIMATE.REGION:
@@ -182,7 +182,7 @@ How do climate characteristics impact major power outages with high severity?
 
 **Significance Level**: Significance level of 0.05. 
 
-The test statistic was chosen as difference in means because the distributions of the features analyzed are appropriately similar. The resulting p-value was 0.747. With this p-value, we fail to reject the null hypothesis. This suggests that there is no significant evidence that climate categories have a significant impact on outage durations. 
+The test statistic was chosen as difference in means because the distributions of the features analyzed are appropriately similar. The resulting p-value was 0.766. With this p-value, we fail to reject the null hypothesis. This suggests that there is no significant evidence that climate categories have a significant impact on outage durations. 
 
 Below is the empirical distriubtion of the test statistic: 
 
@@ -205,33 +205,47 @@ We can also contextualize the failure to reject the null hypothesis by viewing t
 
 # Framing a Prediction Problem
 
-"""Clearly state your prediction problem and type (classification or regression). If you are building a classifier, make sure to state whether you are performing binary classification or multiclass classification. Report the response variable (i.e. the variable you are predicting) and why you chose it, the metric you are using to evaluate your model and why you chose it over other suitable metrics (e.g. accuracy vs. F1-score).
+My model will attempt to predict the cause of a major power outage. This is a multiclass classification problem. The response variable, CAUSE.CATEGORY, was chosen because it follows the research question: how do climate characteristics impact major power outages with high severity?
 
-Note: Make sure to justify what information you would know at the “time of prediction” and to only train your model using those features. For instance, if we wanted to predict your final exam grade, we couldn’t use your Final Project grade, because the project is only due after the final exam! Feel free to ask questions if you’re not sure.
+The metric I will use to evaluate my model will be F1 score, because it is a balance between accuracy and precision for imbalanced classes. 
 
+At time of prediction, we would know climate region and customers affected through reporting and the outage zone, so we can use these as features to predict the target cause category.
 
 
 # Baseline Model
 
-"""Describe your model and state the features in your model, including how many are quantitative, ordinal, and nominal, and how you performed any necessary encodings. Report the performance of your model and whether or not you believe your current model is “good” and why.
+The model I created is a multiclass Decision Tree classifier using the features climate region and customers affected to predict the cause category of power outages. Climate region is a categorical feature, while customers affected is a quantitative feature.
 
-Tip: Make sure to hit all of the points above: many projects in the past have lost points for not doing so.
+Of the 2 features, I handled the categorical feature with one hot encoding, and passed through the numerical feature. 
+
+In terms of performance, the model is fair, with an accuracy score of 0.80 and an F1 score of 0.79. The F1 score is more important, as it accounts for imbalance in the classes. So, the model performs well much of the time, but it can still be improved with different features and classification techniques.
 
 
 
 # Final Model
 
-"""State the features you added and why they are good for the data and prediction task. Note that you can’t simply state “these features improved my accuracy”, since you’d need to choose these features and fit a model before noticing that – instead, talk about why you believe these features improved your model’s performance from the perspective of the data generating process.
+For the final model, I added month, year, and day of week. These features are good for the prediction task because seasonality and certain days of week can explain many outages, especially with regard to intentional attacks. 
 
-"""Describe the modeling algorithm you chose, the hyperparameters that ended up performing the best, and the method you used to select hyperparameters and your overall model. Describe how your Final Model’s performance is an improvement over your Baseline Model’s performance.
+The modeling algorithm I chose is a Random Forest classifier, which I analyzed using GridSearchCV with 5-fold cross validation. I chose this as an improvement over the Decision Tree classifier used in the baseline model. Using this method, it results that the hyperparameters that performed best were: entropy for criterion, a max depth of 20, min samples leaf set to 1, min samples split set to 3, and n estimators set to 50. 
 
-Optional: Include a visualization that describes your model’s performance, e.g. a confusion matrix, if applicable.
+The performance was a good improvement over the baseline model, with an accuracy score of 0.88, and an F1 score of 0.87. This means that the vast majority of the time, the model is correct in its predictions.
 
 
 
 # Fairness Analysis
 
-"""Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
-p-value, and your conclusion.
+For fairness analysis, I decided to compare short duration outages to long duration outages, defined as short if below the mean of outage duration, and long if above the mean. The evaluation metric I used is the F1 score.
 
-Optional: Embed a visualization related to your permutation test in your website.
+**Null Hypothesis (H0):** The model has a very similar F1 score for short outages and long outages, and differences are due to random chance.
+**Alternative Hypothesis (H1):** The model does not have similar F1 scores for short outages and long outages, and differences are not by chance.
+
+The test statistic I used is difference in group means for F1 score. The significance level I set for the p-value is 0.05. I ran a permutation test with 10,000 iterations, and the resulting p-value was 0.0, which suggests that the model's F1 score is different between short and long outages, so I reject the null hypothesis. 
+
+Below is a graph of the distribution of the test statistic.
+
+<iframe
+  src="assets/fairnessperm.html"
+  width="600"
+  height="400"
+  frameborder="0"
+></iframe>   
