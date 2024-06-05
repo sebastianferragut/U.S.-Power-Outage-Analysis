@@ -237,6 +237,7 @@ The performance was a good improvement over the baseline model, with an accuracy
 For fairness analysis, I decided to compare short duration outages to long duration outages, defined as short if below the mean of outage duration, and long if above the mean. The evaluation metric I used is the F1 score.
 
 **Null Hypothesis (H0):** The model has a very similar F1 score for short outages and long outages, and differences are due to random chance.
+
 **Alternative Hypothesis (H1):** The model does not have similar F1 scores for short outages and long outages, and differences are not by chance.
 
 The test statistic I used is difference in group means for F1 score. The significance level I set for the p-value is 0.05. I ran a permutation test with 10,000 iterations, and the resulting p-value was 0.0, which suggests that the model's F1 score is different between short and long outages, so I reject the null hypothesis. 
